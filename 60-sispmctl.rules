@@ -1,0 +1,5 @@
+SUBSYSTEM=="usb", ATTRS{idVendor}=="04b4", ATTRS{idProduct}=="fd10", GROUP="sispmctl", MODE="660"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="04b4", ATTRS{idProduct}=="fd11", GROUP="sispmctl", MODE="660"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="04b4", ATTRS{idProduct}=="fd12", GROUP="sispmctl", MODE="660"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="04b4", ATTRS{idProduct}=="fd13", GROUP="sispmctl", MODE="660"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="04b4", ATTRS{idProduct}=="fd15", GROUP="sispmctl", MODE="660"
