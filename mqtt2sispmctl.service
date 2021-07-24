@@ -1,0 +1,14 @@
+[Unit]
+Description=mqtt2sispmctl
+After=raspotify.service
+
+[Service]
+ExecStart=python3 mqtt2sispmctl.py
+WorkingDirectory=/srv/mqtt2sispmctl
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=mqtt2sispmctl
+
+[Install]
+WantedBy=multi-user.target
