@@ -44,7 +44,7 @@ def get_cmd(base_topic, mode):
 def on_message(client, userdata, msg):
     print(f"Received '{msg.payload}' on topic '{msg.topic}'")
 
-    if msg.topic == hass_topic and msg.payload == "online":
+    if str(msg.topic) == hass_topic and str(msg.payload)[2:-1] == "online":
         announce()
         return
 
