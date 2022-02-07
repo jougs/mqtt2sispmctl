@@ -13,6 +13,8 @@ outlets = {
     "Mancave PA amplifier 2": "3",
 }
 
+hass_topic = "homeassistant/status"
+
 base_cmd = "sispmctl"
 
 
@@ -27,8 +29,11 @@ def on_connect(client, userdata, flags, rc):
     print(f"Connected to broker with result code {rc}")
 
     for topic in outlets:
-        print(f"Subscribing to topic {topic}")
+        print(f"Subscribing to {topic}")
         client.subscribe(topic + "/command")
+
+    print(f"Subscribing to {hass_topic}")
+    client.subscribe(hass_topic)
 
 
 def get_cmd(base_topic, mode):
@@ -38,6 +43,10 @@ def get_cmd(base_topic, mode):
 
 def on_message(client, userdata, msg):
     print(f"Received '{msg.payload}' on topic '{msg.topic}'")
+
+    if msg.topic == hass_topic and msg.payload == "online":
+        announce()
+        return
 
     base_topic = str(msg.topic).rsplit("/", 1)[0]
 
@@ -80,7 +89,7 @@ def announce():
         print(f"Publishing config for '{data['name']}' on '{config_topic}'")
         client.publish(config_topic, json.dumps(config))
 
-        
+
 tmp = {}
 for name, outlet in outlets.items():
     topic = name.lower().replace(" ", "_")
